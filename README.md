@@ -30,7 +30,8 @@ Run the configuration script with local installation enabled:
 ```bash
 ./configure --enable-local
 ```
-**What this does**: Configures Crosstool-NG for a local build. Ensure any required dependencies are installed using:
+**What this does**: Configures Crosstool-NG for a local build. Ensure any required dependencies are installed 
+it will give you some errors to install the dependencies required
 ```bash
 sudo apt install <dependency>
 ```
@@ -41,7 +42,7 @@ Compile the Crosstool-NG source code:
 ```bash
 make
 ```
-**What this does**: Builds the Crosstool-NG executable file. After this step, you will have the `ct-ng` executable ready to use.
+**What this does**: Compiles the Crosstool-NG executable file. After this step, you will have the `ct-ng` executable ready to use.
 
 For additional information, refer to the [Crosstool-NG Documentation](https://crosstool-ng.github.io/docs/).
 
