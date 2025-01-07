@@ -18,8 +18,6 @@ git checkout 1.26.0
 ```
 **What this does**: Ensures you are working with the stable version `1.26.0` of Crosstool-NG.
 
-For additional information, refer to the [Crosstool-NG Documentation](https://crosstool-ng.github.io/docs/).
-
 ### 3. Bootstrap the Build System
 Prepare the build system:
 ```bash
@@ -44,6 +42,8 @@ Compile the Crosstool-NG source code:
 make
 ```
 **What this does**: Builds the Crosstool-NG executable file. After this step, you will have the `ct-ng` executable ready to use.
+
+For additional information, refer to the [Crosstool-NG Documentation](https://crosstool-ng.github.io/docs/).
 
 ---
 
