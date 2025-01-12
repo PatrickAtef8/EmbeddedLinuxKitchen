@@ -35,7 +35,7 @@ it will give you some errors to install the dependencies required
 ```bash
 sudo apt install <dependency>
 ```
-_Example_: `sudo apt install bison`
+_Example_: `sudo apt install zlib`
 
 ### 5. Build Crosstool-NG
 Compile the Crosstool-NG source code:
