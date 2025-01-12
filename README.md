@@ -1,6 +1,6 @@
 # Repository Overview
 
-Welcome to the repository! This main README provides a concise overview of the project structure and links to detailed guides for each component. Use it as a starting point to navigate and understand the repository.
+This main README provides an overview of the repository and guides for each directory.
 
 ---
 
@@ -21,11 +21,3 @@ Welcome to the repository! This main README provides a concise overview of the p
   - Testing U-Boot functionalities and loading files in QEMU.
 
 ---
-
-### Additional Notes
-
-- Each component directory contains a dedicated `README.md` with in-depth, actionable instructions.
-- This overview will be updated as new components and documentation are added.
-
-Feel free to explore, contribute, and enhance!
-
