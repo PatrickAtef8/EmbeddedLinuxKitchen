@@ -6,7 +6,7 @@ This project demonstrates how to write a bare-metal program to control GPIO pins
 
 ### 1. `gpio_control.S` (Assembly File)
 
-This file contains the startup code that runs before the main program. It sets up the stack pointer, disables caches, and jumps to the `main` function.
+This file contains the startup code that runs before the main program. It sets up the stack pointer, and jumps to the `main` function.
 
 - **Key components**:
   - `ldr x0, =0x800000`: Sets the stack pointer to `0x800000`.
