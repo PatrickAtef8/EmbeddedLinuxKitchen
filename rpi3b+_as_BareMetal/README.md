@@ -45,8 +45,10 @@ This file defines the memory layout of the program. It ensures that the program 
 ---
 
 ## Commands Explanation
-
-### 1. `aarch64-patrick-linux-gnu-gcc -c -nostdlib -o gpio_control.o gpio_control.c -march=armv8-a`
+1- 
+ ```
+ aarch64-patrick-linux-gnu-gcc -c -nostdlib -o gpio_control.o gpio_control.c
+```
 This command compiles the C source file `gpio_control.c` into an object file (`gpio_control.o`) for the ARM architecture. The flags used are:
 
 - `-c`: Compile the source file into an object file, without linking.
@@ -56,14 +58,20 @@ This command compiles the C source file `gpio_control.c` into an object file (`g
 
 - **What it does**: It translates the C source code into machine code for the ARMv8-A architecture.
 
-### 2. `aarch64-patrick-linux-gnu-as -o gpio_controlST.o gpio_control.S`
+2-
+ ```
+aarch64-patrick-linux-gnu-as -o gpio_controlST.o gpio_control.S
+```
 This command assembles the assembly source file `gpio_control.S` into an object file (`gpio_controlST.o`). The flags used are:
 
 - `-o gpio_controlST.o`: Specifies the name of the output object file.
 
 - **What it does**: It translates the assembly code into an object file that the linker can later combine with other object files.
 
-### 3. `aarch64-patrick-linux-gnu-ld -nostdlib -T gpio_control.ld -o gpio_control.elf gpio_controlST.o gpio_control.o`
+3- 
+  ```
+  aarch64-patrick-linux-gnu-ld -nostdlib -T gpio_control.ld -o gpio_control.elf gpio_controlST.o gpio_control.o
+  ```
 This command links the object files (`gpio_controlST.o` and `gpio_control.o`) to create an executable ELF file (`gpio_control.elf`). The flags used are:
 
 - `-nostdlib`:  Tells the compiler to not use system calls because the project is full dependent on u-boot (no image), this is common for bare-metal programming where we do not rely on the operating system or standard libraries.
@@ -72,7 +80,10 @@ This command links the object files (`gpio_controlST.o` and `gpio_control.o`) to
 
 - **What it does**: It combines the object files and links them to create a final executable in the ELF format.
 
-### 4. `aarch64-patrick-linux-gnu-objcopy -O binary gpio_control.elf gpio_control.bin`
+4-
+ ```
+ aarch64-patrick-linux-gnu-objcopy -O binary gpio_control.elf gpio_control.bin
+```
 This command converts the ELF file (`gpio_control.elf`) into a raw binary file (`gpio_control.bin`). The flags used are:
 
 - `-O binary`: Specifies the output format as raw binary. The `objcopy` tool is used to convert between different object file formats.
@@ -90,7 +101,7 @@ fatload mmc 0:1 0x81000 gpio_control.bin
 ```
 go 0x81000
 ```
-**as you tell the linker that the gpio_control.bin application will start on address 0x81000 so you shoul use fatload to load this program in this specific address then us go to just go to this address where you can find the program as it loaded to RAM by fatload**
+**As you tell the linker that the gpio_control.bin application will start on address 0x81000 so you shoul use fatload to load this program in this specific address then us go to just go to this address where you can find the program as it loaded to RAM by fatload**
 NOW, the led is on 
 
 
