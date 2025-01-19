@@ -10,7 +10,6 @@ This file contains the startup code that runs before the main program. It sets u
 
 - **Key components**:
   - `ldr x0, =0x800000`: Sets the stack pointer to `0x800000`.
-  - `msr SCTLR_EL1, x0`: Disables the cache to avoid potential issues during startup.
   - `ldr x0, =main`: Loads the address of the `main` function and branches to it.
 
 ### 2. `gpio_control.c` (C File)
@@ -30,18 +29,6 @@ This file defines the memory layout of the program. It ensures that the program 
 - **Key components**:
   - `. = 0x81000;`: Sets the starting address for the program’s code.
   - `.text`, `.data`, and `.bss` sections: These define where the program's executable code, initialized data, and uninitialized data are placed in memory.
----
-
-## Final Explanation
-
-### Why You Need These Files:
-
-1. **`gpio_control.S`**: This file initializes the system, particularly the stack pointer, which is essential for function calls and local variables. It also ensures safe startup by disabling caches, which could interfere with hardware control during early stages.
-
-2. **`gpio_control.c`**: This file contains the main logic that interacts with the hardware directly. It configures the GPIO pin (GPIO 17 in this case) to be used as an output and then sets it high.
-
-3. **`gpio_control.ld`**: The linker script controls how the various sections of the program (code, initialized data, uninitialized data) are arranged in memory, ensuring the program starts at the correct address and that all the necessary sections are included.
-
 ---
 
 ## Commands Explanation
