@@ -16,8 +16,8 @@ This main README provides an overview of the repository and guides for each dire
 ### 2. U-Boot Setup and SD Card Preparation
 - **Purpose**: Instructions for preparing an SD card, configuring U-Boot, and testing with QEMU.
 - **Highlights**:
-  - Creating and partitioning an SD card image.
-  - Detailed process for building U-Boot using an ARM cross-compiler.
-  - Testing U-Boot functionalities and loading files in QEMU.
+  - Creating and partitioning an SD card (Virtual and Physical).
+  - Detailed process for building U-Boot using an ARM cross-compiler and for rpi 3B+.
+  - Testing U-Boot functionalities and loading files in QEMU and in Rassbery pi.
 
 ---
