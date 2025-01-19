@@ -87,7 +87,7 @@ fatload mmc 0:1 0x81000 gpio_control.bin
 ```
 go 0x81000
 ```
-**As you tell the linker that the gpio_control.bin application will start on address 0x81000 so you shoul use fatload to load this program in this specific address then us go to just go to this address where you can find the program as it loaded to RAM by fatload**
+**As you tell the linker that the gpio_control.bin application will start on address 0x81000 so, you should use `fatload` to load this program in this specific address then use `go` to just go to this address where you can find the program as it loaded to RAM by fatload.**
 NOW, the led is on 
 
 
