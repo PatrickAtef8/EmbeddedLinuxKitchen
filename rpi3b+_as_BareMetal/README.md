@@ -54,7 +54,6 @@ This command compiles the C source file `gpio_control.c` into an object file (`g
 - `-c`: Compile the source file into an object file, without linking.
 - `-nostdlib`: Tells the compiler to not use system calls because the project is full dependent on u-boot (no image), this is common for bare-metal programming where we do not rely on the operating system or standard libraries.
 - `-o gpio_control.o`: Specifies the name of the output object file.
-- `-march=armv8-a`: Tells the compiler to generate code for the ARMv8-A architecture.
 
 - **What it does**: It translates the C source code into machine code for the ARMv8-A architecture.
 
