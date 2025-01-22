@@ -1,0 +1,39 @@
+# Define reusable variables
+setenv check_mmc 'mmc dev 0'
+setenv load_from_mmc 'fatload mmc 0:1 0x61000000 zImage'
+setenv load_from_tftp 'tftp 0x61000000 zImage'
+setenv display_mmc_found 'echo "MMC device found"'
+setenv display_file_found 'echo "zImage found and loaded from MMC"'
+setenv display_file_not_found 'echo "zImage not found on MMC"'
+setenv display_tftp_loaded 'echo "zImage loaded from TFTP"'
+setenv display_tftp_failed 'echo "Failed to load zImage from tftp, setting GPIO 10"'
+setenv turn_on_led 'gpio set 10'
+setenv dump_memory 'md 0x61000000'
+
+# Main logic
+if run check_mmc; then
+    run display_mmc_found;
+    if run load_from_mmc; then
+        run display_file_found;
+        run dump_memory;
+    else
+        run display_file_not_found;
+        if run load_from_tftp; then
+            run display_tftp_loaded;
+            run dump_memory; 
+        else
+            run display_tftp_failed;
+            run turn_on_led;
+        fi;
+    fi;
+else
+    echo "MMC device not found";
+    if run load_from_tftp; then
+        run display_tftp_loaded;
+        run dump_memory;
+    else
+        run display_tftp_failed;
+        run turn_on_led;
+    fi;
+fi;
+
