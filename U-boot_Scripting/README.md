@@ -1,6 +1,6 @@
 # U-Boot Scripting with QEMU and Cross-Compilation
 
-This repository contains instructions and scripts to set up U-Boot with QEMU for ARM emulation on an x86 machine. It includes steps for creating and testing U-Boot scripts to load a fake kernel image (`zImage`) from an MMC device, TFTP server, or fallback to a GPIO operation.
+This directory contains instructions and scripts to set up U-Boot with QEMU for ARM emulation on an x86 machine. It includes steps for creating and testing U-Boot scripts to load a fake kernel image (`zImage`) from an MMC device, TFTP server, or fallback to a GPIO operation.
 
 ---
 
