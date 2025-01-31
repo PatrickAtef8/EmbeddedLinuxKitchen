@@ -7,11 +7,11 @@
 - Before adding sysroot
 ![My Image](/Kernel_Work/1-BusyBox_Dynamically_Compiled/before_adding_sysroot.png)
 - After adding sysroot
-![My Image](/1-BusyBox_Dynamically_Compiled/after_adding_sysroot.png)
+![My Image](/Kernel_Work/1-BusyBox_Dynamically_Compiled/after_adding_sysroot.png)
 - Testing Commands added from busybox
-![My Image](/1-BusyBox_Dynamically_Compiled/testing_added_commands.png)
+![My Image](/Kernel_Work/1-BusyBox_Dynamically_Compiled/testing_added_commands.png)
 - rootramfs in qemu
-![My Image](/1-BusyBox_Dynamically_Compiled/testing_rootramfs.png)
+![My Image](/Kernel_Work/1-BusyBox_Dynamically_Compiled/testing_rootramfs.png)
 ---
 
 
