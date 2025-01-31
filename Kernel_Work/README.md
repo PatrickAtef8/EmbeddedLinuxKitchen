@@ -17,4 +17,10 @@
 
 ![My Video](/Kernel_Work/2-rootramfs_rpi/KernelONShell.mp4)
 
+<video width="320" height="240" controls loop="" muted = "" autoplay="">
+<source src="https://github.com/PatrickAtef8/EmbeddedLinuxKitchen/raw/refs/heads/main/Kernel_Work/2-rootramfs_rpi/KernelONShell.mp4">
+</video>
+
+
+
 **A lot of steps to be mentioned,, will be updated in details as soon as possible**
