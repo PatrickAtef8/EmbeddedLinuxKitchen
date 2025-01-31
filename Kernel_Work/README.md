@@ -4,9 +4,7 @@
 - QEMU
 
 ---
-- Before adding sysroot
-![My Image](/Kernel_Work/1-BusyBox_Dynamically_Compiled/before_adding_sysroot.png)
-- After adding sysroot
+- After adding sysroot(kernel panics without sysroot)
 ![My Image](/Kernel_Work/1-BusyBox_Dynamically_Compiled/after_adding_sysroot.png)
 - Testing Commands added from busybox
 ![My Image](/Kernel_Work/1-BusyBox_Dynamically_Compiled/testing_added_commands.png)
