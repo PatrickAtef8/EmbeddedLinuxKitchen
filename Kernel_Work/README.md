@@ -5,7 +5,7 @@
 
 ---
 - Before adding sysroot
-![My Image](/1-BusyBox_Dynamically_Compiled/before_adding_sysroot.png)
+![My Image](/Kernel_Work/1-BusyBox_Dynamically_Compiled/before_adding_sysroot.png)
 - After adding sysroot
 ![My Image](/1-BusyBox_Dynamically_Compiled/after_adding_sysroot.png)
 - Testing Commands added from busybox
