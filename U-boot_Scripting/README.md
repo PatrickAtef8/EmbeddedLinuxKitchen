@@ -159,12 +159,12 @@ sudo qemu-system-arm -M vexpress-a9 -kernel u-boot -nographic -sd ~/sdcard/sd.im
 
 1- If loading `zImage` from `sd.img`
 
-![alt text](/Results/LoadFromSd.img.png)
+![alt text](Results/LoadFromSd.img.png)
 
 2- If loading from `zImage` from `tftp`
 
-![alt text](/Results/LoadFromTFTP.png)
-![alt text](/Results/Server_CLient.png)
+![alt text](Results/LoadFromTFTP.png)
+![alt text](Results/Server_CLient.png)
 ---
 
 ## Additional Notes
