@@ -19,7 +19,6 @@
 
 <video width="320" height="240" controls loop muted autoplay>
   <source src="https://github.com/PatrickAtef8/EmbeddedLinuxKitchen/raw/main/Kernel_Work/2-rootramfs_rpi/KernelONShell.mp4" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
 
