@@ -17,5 +17,6 @@
 
 ### 2-rootramfs_rpi
 
+![My Video](/Kernel_Work/2-rootramfs_rpi/KernelONShell.mp4)
 
 **A lot of steps to be mentioned,, will be updated in details as soon as possible**
