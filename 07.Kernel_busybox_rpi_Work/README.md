@@ -178,7 +178,4 @@ Now you have a Raspberry Pi running entirely from RAM! 🎉
 
 ### Video Result
 
-<video width="600" controls>
-  <source src="Result/KernelONShell.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+https://github.com/user-attachments/assets/70c65382-3b9a-4d40-94df-7b9ad7489c56
