@@ -98,9 +98,33 @@ console::askfirst:/bin/sh
 Explanation:
 - `::sysinit:/etc/init.d/rcS`: Runs the `rcS` script as the first system initialization process.
 - `console::askfirst:/bin/sh`: Spawns a shell that waits for user input before proceeding.
-- Additional options:
-  - `::ctrlaltdel:/sbin/reboot`: Allows rebooting with `Ctrl+Alt+Del`.
 
+## Additional options:
+### Inittab Configuration Guide
+ - From `init.c`.
+
+### Action Flags from `init.c`
+
+- `SYSINIT (0x01)`: Runs system initialization commands.
+- `WAIT (0x02)`: Executes after `SYSINIT` and waits for completion.
+- `ONCE (0x04)`: Runs once after `WAIT` but does not wait for completion.
+- `RESPAWN (0x08)`: Starts processes after `ONCE` and restarts them if they exit.
+- `ASKFIRST (0x10)`: Similar to `RESPAWN`, but requires the user to press `<Enter>` before execution.
+- `CTRLALTDEL (0x20)`: Executes when `Ctrl + Alt + Del` is pressed; typically used for system reboot.
+- `SHUTDOWN (0x40)`: Runs before killing processes when halting, rebooting, or powering off.
+- `RESTART (0x80)`: Executes on `SIGQUIT`, restarting the system by replacing the `init` process.
+
+### `/etc/inittab` Example Configuration
+
+```plaintext
+::sysinit:/etc/init.d/rcS      # Run system initialization script
+::wait:/sbin/fsck -A -y        # Run filesystem check and wait
+::once:/bin/mount -a           # Mount all filesystems once
+tty1::respawn:/bin/sh          # Spawn a shell on tty1
+console::askfirst:/bin/sh      # Wait for user input before spawning shell
+::ctrlaltdel:/sbin/reboot      # Reboot on Ctrl + Alt + Del
+::shutdown:/sbin/shutdown -h now  # Shutdown cleanly
+```
 ## Configuring `rcS`
 Edit `rcS`:
 ```sh
