@@ -100,7 +100,7 @@ The `HelloApp` service relies on an actual script (`HelloApp.sh`) that prints a 
 
 ### **Step 1: Create `HelloApp.sh`**
 
-**The same `rawshana`
+**The same `rawshana`**
 ```sh
 cat <<EOF > /usr/bin/HelloApp.sh
 #!/bin/sh
