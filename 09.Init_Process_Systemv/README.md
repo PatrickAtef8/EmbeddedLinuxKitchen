@@ -1,57 +1,60 @@
 # SystemV Init: Running HelloApp in Runlevel 4 on Raspberry Pi
 
-## **Building Buildroot with SystemV Init**
-To set up **Buildroot** with SystemV Init, follow these steps:
+## **Introduction**
+This project demonstrates how to set up a **SysVInit** service using start-stop-daemon to print a message when switching to **runlevel 4** on a Raspberry Pi running Buildroot.
+
+Content:
+- **Cloning and Building Buildroot**
+- **Preparing the SD Card**
+- **SysVInit and runlevels**
+- How to **create a service script** in /etc/init.d/
+- How to **use start-stop-daemon** to manage services
+- How to **modify /etc/inittab** to handle custom runlevels
+- How to **properly link services in /etc/rcX.d/ directories**
+
+---
+
+## **1. Cloning and Building Buildroot**
 
 ### **Step 1: Clone Buildroot Repository**
 ```sh
 git clone git@github.com:buildroot/buildroot.git
-```
-This will download Buildroot source code.
-
-### **Step 2: Checkout a Specific Version**
-```sh
 cd buildroot
 git checkout 2024.11.1
 ```
-This ensures that you are using a stable(latest) version of Buildroot.
 
-### **Step 3: Select a Raspberry Pi Configuration**
+### **Step 2: Configure Buildroot for Raspberry Pi**
 ```sh
 cd buildroot/configs
 ls | grep raspberrypi
-```
-This lists available configurations for Raspberry Pi.
-
-### **Step 4: Configure Buildroot for Raspberry Pi 3 (64-bit)**
-```sh
 make raspberrypi3_64_defconfig
 ```
-This sets up the default configuration for the Raspberry Pi 3 (64-bit).
 
-### **Step 5: Enable SystemV Init**
+### **Step 3: Configure SystemV Init**
+Run the menu configuration tool:
 ```sh
 make menuconfig
 ```
-- Navigate to `System Configuration`
-- Change `Init system` to `SystemV` instead of `BusyBox`
-- Save and exit
+Navigate to **System Configuration** and select **SystemV** as the system initialization method.
 
-After this, proceed with building Buildroot.
-
-## **Introduction**
-This project demonstrates how to set up a **SysVInit** service using `start-stop-daemon` to print a message when switching to **runlevel 4** on a Raspberry Pi running Buildroot.
-
-Content:
-- **SysVInit and runlevels**
-- How to **create a service script** in `/etc/init.d/`
-- How to **use start-stop-daemon** to manage services
-- How to **modify `/etc/inittab`** to handle custom runlevels
-- How to **properly link services in `/etc/rcX.d/` directories**
+### **Step 4: Build Buildroot**
+```sh
+make
+```
+This will generate the necessary files, including the `sdcard.img`.
 
 ---
 
-## **1. Understanding SysVInit and Runlevels**
+## **2. Preparing the SD Card**
+Once the Buildroot build is complete, flash the `sdcard.img` to your SD card:
+```sh
+sudo dd if=buildroot/output/images/sdcard.img of=/dev/mmcblk0 bs=4M status=progress && sync
+```
+Replace `/dev/mmcblk0` with the correct device path for your SD card.
+
+---
+
+## **3. Understanding SysVInit and Runlevels**
 
 ### **What is SysVInit?**
 SysVInit is an initialization system used in Unix-like operating systems to manage system startup and services. It relies on the `/etc/inittab` file and uses **runlevels** to determine system states.
@@ -69,18 +72,16 @@ Runlevels define different states of the system:
 | 5        | Multi-user with GUI |
 | 6        | Reboot |
 
-Our project configures **runlevel 4** to start a custom service, `HelloApp`.
+Our project configures **runlevel 4** to start a custom service, HelloApp.
 
 ---
 
-## **2. Creating `HelloApp` Service Script**
+## **4. Creating HelloApp Service Script**
 We need a script that **runs during runlevel 4** and prints `Hello from HelloApp!` to the console.
 
 ### **Step 1: Create the Service Script**
 Run the following command to create the service script:
-
-**Introduced another way `rewsha gedan` instead of using vi editor**
-
+**Introduced another way rewsha gedan instead of using vi editor**
 ```sh
 cat <<EOF > /etc/init.d/HelloApp
 #!/bin/sh
@@ -134,12 +135,11 @@ chmod +x /etc/init.d/HelloApp
 
 ---
 
-## **3. Creating the Executable Application**
-The `HelloApp` service relies on an actual script (`HelloApp.sh`) that prints a message.
+## **5. Creating the Executable Application**
+The HelloApp service relies on an actual script (`HelloApp.sh`) that prints a message.
 
-### **Step 1: Create `HelloApp.sh`**
-
-**The same `rawshana`**
+### **Step 1: Create HelloApp.sh**
+**The same rawshana**
 ```sh
 cat <<EOF > /usr/bin/HelloApp.sh
 #!/bin/sh
@@ -154,18 +154,28 @@ chmod +x /usr/bin/HelloApp.sh
 
 ---
 
-## **Preparing the SD Card**
-To flash the Buildroot-generated image onto an SD card, use the following command:
+## **6. Configuring SysVInit to Run HelloApp in Runlevel 4**
 
+### **Step 1: Modify /etc/inittab**
+Edit `/etc/inittab` and add the following line **if not present**:
 ```sh
-sudo dd if=buildroot/output/images/sdcard.img of=/dev/mmcblk0 bs=4M status=progress && sync
+rcl4:4:wait:/etc/init.d/rc 4
+```
+This ensures that when you switch to runlevel 4 (`init 4`), the scripts in `/etc/rc4.d/` execute.
+
+### **Step 2: Create a Symbolic link in /etc/rc4.d/**
+SysVInit runs services from `/etc/rcX.d/`, where X is the runlevel number. We must create a symbolic link for HelloApp:
+```sh
+ln -s ../init.d/HelloApp /etc/rc4.d/S99HelloApp
 ```
 
-This writes the `sdcard.img` file from Buildroot to the SD card.
+**Explanation:**
+- `S99HelloApp` → "S" means start, "99" is the priority (higher runs last).
+- The script will execute when `init 4` is called.
 
 ---
 
-## **5. Testing the Setup**
+## **7. Testing the Setup**
 
 ### **Step 1: Reload Init Configuration**
 ```sh
@@ -195,6 +205,7 @@ ps aux | grep HelloApp
 ```sh
 /etc/init.d/HelloApp stop
 ```
+
 Expected output:
 ```
 Stopping HelloApp...
@@ -202,12 +213,27 @@ Stopping HelloApp...
 
 ---
 
-## **7. Conclusion**
-You have successfully:
+## **8. Debugging Issues**
+If HelloApp does not run:
+1. **Check if the script is executable:**
+   ```sh
+   ls -l /etc/init.d/HelloApp
+   ls -l /usr/bin/HelloApp.sh
+   ```
+2. **Manually test HelloApp:**
+   ```sh
+   /etc/init.d/HelloApp start
+   ```
+3. **Check runlevel:**
+   ```sh
+   runlevel
+   ```
+4. **Check process status:**
+   ```sh
+   ps aux | grep HelloApp
+   ```
 
-✅ Configured SystemV init to run `HelloApp` in runlevel 4.  
-✅ Used `start-stop-daemon` to manage a process.  
-✅ Created a fully functional `/etc/init.d/` script.  
-✅ Linked it properly in `/etc/rc4.d/`.  
+---
 
-Now, every time you switch to **runlevel 4**, `HelloApp` will run and print a message! 🚀
+## **9. Conclusion**
+You have successfully set up a SysVInit service to run in **runlevel 4** on a Raspberry Pi with Buildroot! 🚀
