@@ -1,5 +1,44 @@
 # SystemV Init: Running HelloApp in Runlevel 4 on Raspberry Pi
 
+## **Building Buildroot with SystemV Init**
+To set up **Buildroot** with SystemV Init, follow these steps:
+
+### **Step 1: Clone Buildroot Repository**
+```sh
+git clone git@github.com:buildroot/buildroot.git
+```
+This will download Buildroot source code.
+
+### **Step 2: Checkout a Specific Version**
+```sh
+cd buildroot
+git checkout 2024.11.1
+```
+This ensures that you are using a stable(latest) version of Buildroot.
+
+### **Step 3: Select a Raspberry Pi Configuration**
+```sh
+cd buildroot/configs
+ls | grep raspberrypi
+```
+This lists available configurations for Raspberry Pi.
+
+### **Step 4: Configure Buildroot for Raspberry Pi 3 (64-bit)**
+```sh
+make raspberrypi3_64_defconfig
+```
+This sets up the default configuration for the Raspberry Pi 3 (64-bit).
+
+### **Step 5: Enable SystemV Init**
+```sh
+make menuconfig
+```
+- Navigate to `System Configuration`
+- Change `Init system` to `SystemV` instead of `BusyBox`
+- Save and exit
+
+After this, proceed with building Buildroot.
+
 ## **Introduction**
 This project demonstrates how to set up a **SysVInit** service using `start-stop-daemon` to print a message when switching to **runlevel 4** on a Raspberry Pi running Buildroot.
 
@@ -115,25 +154,14 @@ chmod +x /usr/bin/HelloApp.sh
 
 ---
 
-## **4. Configuring SysVInit to Run HelloApp in Runlevel 4**
-
-### **Step 1: Modify `/etc/inittab`**
-Edit `/etc/inittab` and add the following line **if not present**:
-```sh
-rcl4:4:wait:/etc/init.d/rc 4
-```
-This ensures that when you switch to runlevel 4 (`init 4`), the scripts in `/etc/rc4.d/` execute.
-
-### **Step 2: Create a Symlink in `/etc/rc4.d/`**
-SysVInit runs services from `/etc/rcX.d/`, where `X` is the runlevel number. We must create a symbolic link for `HelloApp`:
+## **Preparing the SD Card**
+To flash the Buildroot-generated image onto an SD card, use the following command:
 
 ```sh
-ln -s ../init.d/HelloApp /etc/rc4.d/S99HelloApp
+sudo dd if=buildroot/output/images/sdcard.img of=/dev/mmcblk0 bs=4M status=progress && sync
 ```
 
-**Explanation:**
-- `S99HelloApp` → "S" means start, "99" is the priority (higher runs last).
-- The script will execute when `init 4` is called.
+This writes the `sdcard.img` file from Buildroot to the SD card.
 
 ---
 
@@ -172,41 +200,6 @@ Expected output:
 Stopping HelloApp...
 ```
 
----
-
-## **6. Debugging Issues**
-
-If `HelloApp` does not run:
-1. **Check if the script is executable:**
-   ```sh
-   ls -l /etc/init.d/HelloApp
-   ls -l /usr/bin/HelloApp.sh
-   ```
-   If it’s not executable, run `chmod +x`.
-
-2. **Manually test HelloApp:**
-   ```sh
-   /etc/init.d/HelloApp start
-   ```
-   If it doesn't print "Hello from HelloApp!", check logs:
-   ```sh
-   dmesg | tail -20
-   cat /var/log/messages
-   ```
-
-3. **Check runlevel:**
-   ```sh
-   runlevel
-   ```
-   Ensure it’s `4`.
-
-4. **Check process status:**
-   ```sh
-   ps aux | grep HelloApp
-   ```
-
-## Result 
-![Result](Result/Hello.png)
 ---
 
 ## **7. Conclusion**
