@@ -186,7 +186,7 @@ ln -s ../init.d/HelloApp /etc/rc4.d/S99HelloApp
 ### **Step 1: Move to Rpi**
 
 ```
-sudo umount boot/ root/
+sudo umount boot/ rootfs/
 ```
 ```
 sudo minicom -D /dev/ttyUSB0
@@ -247,4 +247,4 @@ If HelloApp does not run:
 ---
 
 ## **10. Conclusion**
-You have successfully set up a SysVInit service to run in **runlevel 4** on a Raspberry Pi with Buildroot! 🚀
+You have successfully set up a SysVInit service to run in **runlevel 4** on a Raspberry Pi with Buildroot! 
