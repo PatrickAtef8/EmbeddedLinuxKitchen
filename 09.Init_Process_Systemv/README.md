@@ -76,12 +76,18 @@ Our project configures **runlevel 4** to start a custom service, HelloApp.
 
 ---
 
-## **4. Creating HelloApp Service Script**
+## **4. Mount your partitions to make all next steps on your sdcard**
+```
+sudo mount /dev/mmcblk0p1 ~/sdcard/boot
+sudo mount /dev/mmcblk0p2 ~/sdcard/rootfs
+``` 
+
+## **5. Creating HelloApp Service Script**
 We need a script that **runs during runlevel 4** and prints `Hello from HelloApp!` to the console.
 
 ### **Step 1: Create the Service Script**
 Run the following command to create the service script:
-**Introduced another way rewsha gedan instead of using vi editor**
+**Introduced another way `rewsha gedan` instead of using vi editor**
 ```sh
 cat <<EOF > /etc/init.d/HelloApp
 #!/bin/sh
@@ -135,11 +141,11 @@ chmod +x /etc/init.d/HelloApp
 
 ---
 
-## **5. Creating the Executable Application**
+## **6. Creating the Executable Application**
 The HelloApp service relies on an actual script (`HelloApp.sh`) that prints a message.
 
 ### **Step 1: Create HelloApp.sh**
-**The same rawshana**
+**The same `rawshana`**
 ```sh
 cat <<EOF > /usr/bin/HelloApp.sh
 #!/bin/sh
@@ -154,7 +160,7 @@ chmod +x /usr/bin/HelloApp.sh
 
 ---
 
-## **6. Configuring SysVInit to Run HelloApp in Runlevel 4**
+## **7. Configuring SysVInit to Run HelloApp in Runlevel 4**
 
 ### **Step 1: Modify /etc/inittab**
 Edit `/etc/inittab` and add the following line **if not present**:
@@ -175,12 +181,17 @@ ln -s ../init.d/HelloApp /etc/rc4.d/S99HelloApp
 
 ---
 
-## **7. Testing the Setup**
+## **8. Testing the Setup**
 
-### **Step 1: Reload Init Configuration**
-```sh
-telinit q
+### **Step 1: Move to Rpi**
+
 ```
+sudo umount boot/ root/
+```
+```
+sudo minicom -D /dev/ttyUSB0
+```
+**Connect rpi**
 
 ### **Step 2: Switch to Runlevel 4**
 ```sh
@@ -213,7 +224,7 @@ Stopping HelloApp...
 
 ---
 
-## **8. Debugging Issues**
+## **9. Debugging Issues**
 If HelloApp does not run:
 1. **Check if the script is executable:**
    ```sh
@@ -235,5 +246,5 @@ If HelloApp does not run:
 
 ---
 
-## **9. Conclusion**
+## **10. Conclusion**
 You have successfully set up a SysVInit service to run in **runlevel 4** on a Raspberry Pi with Buildroot! 🚀
