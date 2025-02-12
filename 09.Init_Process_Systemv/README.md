@@ -161,15 +161,35 @@ chmod +x /usr/bin/HelloApp.sh
 ---
 
 ## **7. Configuring SysVInit to Run HelloApp in Runlevel 4**
+### **Step 1: Create neccessary directories and files if not existed
+ ```
+mkdir /etc/rc4.d
+touch /etc/rc4.d/S99HelloApp **Fill it with the same content of HelloApp under init.d**
+```
+### **Step 2:Create rc script
 
-### **Step 1: Modify /etc/inittab**
-Edit `/etc/inittab` and add the following line **if not present**:
+```sh
+cat <<EOF > /etc/init.d/rc
+if [ -d "/etc/rc${runlevel}.d" ]; then
+    for i in /etc/rc${runlevel}.d/S*; do
+        [ -x "$i" ] && "$i" start
+    done
+fi
+EOF
+```
+### **Step 3: Make It Executable**
+```sh
+chmod +x /etc/init.d/rc
+```
+
+### **Step 4: Modify /etc/inittab**
+Edit `/etc/inittab` and add the following line:
 ```sh
 rcl4:4:wait:/etc/init.d/rc 4
 ```
 This ensures that when you switch to runlevel 4 (`init 4`), the scripts in `/etc/rc4.d/` execute.
 
-### **Step 2: Create a Symbolic link in /etc/rc4.d/**
+### **Step 5: Create a Symbolic link in /etc/rc4.d/**
 SysVInit runs services from `/etc/rcX.d/`, where X is the runlevel number. We must create a symbolic link for HelloApp:
 ```sh
 ln -s ../init.d/HelloApp /etc/rc4.d/S99HelloApp
