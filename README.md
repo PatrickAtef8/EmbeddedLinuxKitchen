@@ -40,7 +40,7 @@ Classic System V init system implementation. Understanding traditional Linux ini
 #### **10. Init Process Systemd**
 Modern systemd initialization. Configure contemporary init with advanced service management.
 
-## 🛠️ Key Technologies
+## Key Technologies
 
 - **Toolchains**: crosstool-ng for cross-compilation
 - **Bootloaders**: U-Boot for ARM platforms
@@ -65,7 +65,7 @@ Modern systemd initialization. Configure contemporary init with advanced service
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone git@github.com:PatrickAtef8/EmbeddedLinuxKitchen.git
 cd EmbeddedLinuxKitchen
 
 # Start with toolchain creation
@@ -82,7 +82,7 @@ cd 01.Toolchain_Work
 4. **Try 08-10.Init_Process_*** - Understand different init systems
 5. **Advance to Raspberry Pi sections** (03, 07) when ready for real hardware
 
-## 🔧 Build Artifacts
+## Build Artifacts
 
 The repository includes pre-built components for quick testing:
 - `Image` / `zImage` - Compiled Linux kernel images
@@ -114,7 +114,7 @@ Each directory contains specific experiments and configurations. Feel free to:
 - [BusyBox Documentation](https://busybox.net/)
 - [ARM Documentation](https://developer.arm.com/)
 
-## ⚖️ License
+## License
 
 Refer to individual component licenses (Linux kernel: GPLv2, U-Boot: GPLv2, BusyBox: GPLv2)
 
