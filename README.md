@@ -133,7 +133,6 @@ Each directory contains specific experiments and configurations. Feel free to:
 - [Device Tree Reference](https://devicetree-specification.readthedocs.io/)
 
 ### Video Courses & Tutorials
-- [Bootlin YouTube Channel](https://www.youtube.com/c/BootlinEmbeddedLinux) - Free embedded Linux videos
 - [Free Electrons Training](https://bootlin.com/training/) - Professional training slides (free download)
 
 ### Community & Forums
