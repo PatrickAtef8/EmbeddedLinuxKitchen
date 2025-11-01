@@ -1,4 +1,4 @@
-# Embedded Linux Kitchen 🐧
+# Embedded Linux Kitchen
 
 A comprehensive hands-on repository for building embedded Linux systems from scratch. This project takes you through the complete journey of creating custom embedded Linux distributions, from toolchain compilation to init system configuration.
 
@@ -60,12 +60,20 @@ Modern systemd initialization. Configure contemporary init with advanced service
 6. **Implement various init systems** and understand their differences
 7. **Work with both virtual and physical hardware**
 
+## Getting Started
+
+### Prerequisites
+
+- Linux development machine (Ubuntu/Debian recommended)
+- Basic knowledge of C programming and Linux command line
+- QEMU for virtual platform testing
+- (Optional) Raspberry Pi 3B+ for physical hardware experiments
 
 ### Quick Start
 
 ```bash
 # Clone the repository
-git clone git@github.com:PatrickAtef8/EmbeddedLinuxKitchen.git
+git clone <repository-url> ssh or https
 cd EmbeddedLinuxKitchen
 
 # Start with toolchain creation
@@ -108,18 +116,37 @@ Each directory contains specific experiments and configurations. Feel free to:
 
 ## Resources
 
-- [Linux From Scratch](http://www.linuxfromscratch.org/)
-- [Buildroot Manual](https://buildroot.org/docs.html)
-- [U-Boot Documentation](https://www.denx.de/wiki/U-Boot)
-- [BusyBox Documentation](https://busybox.net/)
-- [ARM Documentation](https://developer.arm.com/)
+### Comprehensive Guides
+- [Bootlin Embedded Linux Training](https://bootlin.com/docs/) - Free, professional-quality training materials
+- [Mastering Embedded Linux Programming](https://github.com/PacktPublishing/Mastering-Embedded-Linux-Programming-Third-Edition) - Book companion code
+- [Embedded Linux Wiki](https://elinux.org/) - Community wiki with extensive howtos
 
-## License
+### Official Documentation
+- [Buildroot User Manual](https://buildroot.org/downloads/manual/manual.html)
+- [U-Boot Documentation](https://docs.u-boot.org/)
+- [Linux Kernel Documentation](https://www.kernel.org/doc/html/latest/)
+- [BusyBox Documentation](https://busybox.net/documentation.html)
+
+### ARM & Hardware Specific
+- [ARM Developer Documentation](https://developer.arm.com/documentation)
+- [Raspberry Pi Documentation](https://www.raspberrypi.com/documentation/)
+- [Device Tree Reference](https://devicetree-specification.readthedocs.io/)
+
+### Video Courses & Tutorials
+- [Bootlin YouTube Channel](https://www.youtube.com/c/BootlinEmbeddedLinux) - Free embedded Linux videos
+- [Free Electrons Training](https://bootlin.com/training/) - Professional training slides (free download)
+
+### Community & Forums
+- [Buildroot Mailing List](https://lists.buildroot.org/mailman/listinfo/buildroot)
+- [U-Boot Mailing List](https://lists.denx.de/listinfo/u-boot)
+- [Stack Overflow - Embedded Linux](https://stackoverflow.com/questions/tagged/embedded-linux)
+
+## ⚖️ License
 
 Refer to individual component licenses (Linux kernel: GPLv2, U-Boot: GPLv2, BusyBox: GPLv2)
 
 ---
 
-**Happy Embedded Linux Hacking!**
+**Happy Embedded Linux Hacking! 🚀**
 
 *This repository is a learning kitchen - experiment, break things, and understand embedded Linux from the ground up.*
